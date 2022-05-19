@@ -105,6 +105,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         if header.section == 0 {
             header.notifyIcon.image = UIImage(named: "notify")
+        } else {
+            header.notifyIcon.image = nil
         }
         
         header.delegate = self
@@ -122,7 +124,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         separator.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         separator.widthAnchor.constraint(equalToConstant: tableView.frame.width - 30).isActive = true
         separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
         separator.backgroundColor = .white
         separator.alpha = 0.5
         separator.backgroundColor = .white
@@ -206,7 +207,9 @@ extension ViewController: CollapsibleTableViewHeaderDelegate {
     }
     
     private func updateTable(with index: Int) {
-        tableView.reloadSections(NSIndexSet(index: index) as IndexSet, with: .automatic)
+        UIView.animate(withDuration: 1.5, delay: 1) {
+            self.tableView.reloadData()
+        }
     }
     
 }
